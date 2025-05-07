@@ -2,13 +2,12 @@ import { ThemeProvider } from "@mui/material/styles";
 import theme from "./theme";
 import { CssBaseline } from '@mui/material';
 import React, { useState } from "react";
-import { View} from "react-native";
+import { Box } from "@mui/material";
 import AddTaskButton from "./Components/AddTaskButton"; 
 import Header from "./Components/Header";
 import { Task } from "./Objects/Task";
 import TaskList from "./Components/TaskList";
 import AddTaskModal from "./Components/TaskCreationForm";
-import JSX from "react";
 
 /**
  * The `Index` component serves as the main entry point for the application.
@@ -37,9 +36,7 @@ import JSX from "react";
  * }
  * ```
  */
-export default function Index(): JSX.ReactElement {
-
-  <link href='http://fonts.googleapis.com/css?family=Roboto:400,100,100italic,300,300italic,400italic,500,500italic,700,700italic,900italic,900' rel='stylesheet' type='text/css'></link>
+export default function Index(): React.ReactElement {
 
   const [showForm, setShowForm] = useState(false); // Controls the visibility of the form modal
   const [tasks, setTasks] = useState<Task[]>([]); // Stores the list of tasks
@@ -78,9 +75,10 @@ export default function Index(): JSX.ReactElement {
   return (
     <ThemeProvider theme={theme}>
     <div>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap" />
         <CssBaseline />
         <Header title="Welcome Back, Ellie. ☀️" subtitle="Let's get started with your tasks." />
-        <View style={{ flex: 1 }}>
+        <Box sx={{ flex: 1 }}>
           <TaskList tasks={tasks} toggleTaskCompletion={toggleTaskCompletion} />
           <AddTaskButton onClick={() => setShowForm(true)} />
           <AddTaskModal
@@ -88,7 +86,7 @@ export default function Index(): JSX.ReactElement {
             onClose={() => setShowForm(false)}
             onSave={addTask}
           />
-        </View>
+        </Box>
     </div>
   </ThemeProvider>
   );
