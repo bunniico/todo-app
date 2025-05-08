@@ -22,6 +22,8 @@ import AddTaskModal from "./Components/TaskCreationForm";
  * @remarks
  * - The component uses React's `useState` hook to manage the visibility of the task
  *   creation form and the list of tasks.
+ * - This component relies on Material-UI for theming and UI components, so ensure
+ *   the library is installed and properly configured in your project.
  * - The `addTask` function is responsible for adding a new task to the list and
  *   hiding the modal.
  * - The `toggleTaskCompletion` function toggles the completion status of a task
@@ -49,7 +51,7 @@ export default function Index(): React.ReactElement {
    * Logs the task details to the console and updates the state with the new task.
    */
   const addTask = (task: Task) => {
-    console.log("Task added:" + task.name + " (" + task.id + ")");
+    console.log(`Task added with ID: ${task.id}`);
     setTasks((prevTasks) => [...prevTasks, task]);
     setShowForm(false);
   };
@@ -75,17 +77,13 @@ export default function Index(): React.ReactElement {
   return (
     <ThemeProvider theme={theme}>
     <div>
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@100&display=swap" />
         <CssBaseline />
         <Header title="Welcome Back, Ellie. ☀️" subtitle="Let's get started with your tasks." />
         <Box sx={{ flex: 1 }}>
           <TaskList tasks={tasks} toggleTaskCompletion={toggleTaskCompletion} />
           <AddTaskButton onClick={() => setShowForm(true)} />
-          <AddTaskModal
-            open={showForm}
-            onClose={() => setShowForm(false)}
-            onSave={addTask}
-          />
+          <AddTaskModal open={showForm} onClose={() => setShowForm(false)} onSave={addTask} />
         </Box>
     </div>
   </ThemeProvider>
